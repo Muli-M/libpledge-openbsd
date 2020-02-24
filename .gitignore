@@ -1,4 +1,7 @@
 *.[ao]
 *.so
-./newns
-./pledge
+/pledge
+*~
+*.bak
+debian/
+*.deb
