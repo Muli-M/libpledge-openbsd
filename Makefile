@@ -1,25 +1,28 @@
 # Makefile for the libpledge-openbsd package
 #.error : This Makefile needs GNU make
 
-MULI_TAG?=1.0
+MULI_TAG?=1.1
 ARCH=`dpkg --print-architecture`
 
 include config.mk
 
+LIBPLEDGE=libpledge-openbsd
 PROGS = pledge
-LIBS = libpledge
+LIBS = $(LIBPLEDGE)
 ALL = $(LIBS:=.a) $(LIBS:=.so) $(PROGS)
 
 all: options $(ALL)
 
 $(PROGS) : % : %.o
-$(LIBS:=.a) : %.a : %.o
-$(LIBS:=.so) : %.so : %.o
+#$(LIBS:=.a) : %.a : %.o
+#$(LIBS:=.so) : %.so : %.o
+$(LIBPLEDGE:=.a) : %.a : libpledge.o
+$(LIBPLEDGE:=.so) : %.so : libpledge.o
 
 libpledge.o : include/pledge_syscalls.h include/seccomp_bpf_utils.h
 libpledge.o pledge.o : include/pledge.h
 
-pledge: libpledge.a
+pledge: $(LIBPLEDGE).a
 
 
 pledge:
@@ -49,7 +52,7 @@ install: all
 	mkdir -p $(DESTDIR)$(BINDIR) \
 		$(DESTDIR)$(LIBDIR) \
 		$(DESTDIR)$(INCDIR)
-	install -m0644 libpledge.a libpledge.so $(DESTDIR)$(LIBDIR)
+	install -m0644 $(LIBPLEDGE).a $(LIBPLEDGE).so $(DESTDIR)$(LIBDIR)
 	install -m0644 include/pledge.h $(DESTDIR)$(INCDIR)
 	install -m0755 pledge $(DESTDIR)$(BINDIR)
 	install -m0644 man/pledge.1 $(DESTDIR)$(MANDIR)/man1
