@@ -1,3 +1,7 @@
+#ifdef __linux__
+#include <stdint.h> /* for uint64_t */
+#endif
+
 const uint64_t pledge_syscalls[] = {
 	/**/
 	[SYS_exit] = PLEDGE_ALWAYS,

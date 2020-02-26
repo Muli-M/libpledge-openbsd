@@ -1,7 +1,7 @@
 # Makefile for the libpledge-openbsd package
 #.error : This Makefile needs GNU make
 
-MULI_TAG?=1.1
+MULI_TAG?=1.2
 ARCH=`dpkg --print-architecture`
 
 include config.mk
