@@ -59,6 +59,9 @@ static const struct promise strpromises[] = {
 	{ "mount",	 PLEDGE_MOUNT },
 	{ "key",	 PLEDGE_KEY },
 	{ "kern",	 PLEDGE_KERN },
+	{ "recvfd",      PLEDGE_RECVFD },
+	{ "sendfd",      PLEDGE_SENDFD },
+	{ "dns",         PLEDGE_DNS },
 	{ 0, 0 },
 };
 

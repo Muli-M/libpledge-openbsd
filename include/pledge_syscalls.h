@@ -1,3 +1,4 @@
+#include <sys/syscall.h>
 #ifdef __linux__
 #include <stdint.h> /* for uint64_t */
 #endif
@@ -64,13 +65,13 @@ const uint64_t pledge_syscalls[] = {
 #endif
 	[SYS_writev] = PLEDGE_STDIO,
 	[SYS_pwritev] = PLEDGE_STDIO,
-	[SYS_recvmsg] = PLEDGE_STDIO,
-	[SYS_recvfrom] = PLEDGE_STDIO,
+	[SYS_recvmsg] = PLEDGE_STDIO | PLEDGE_RECVFD,
+	[SYS_recvfrom] = PLEDGE_STDIO | PLEDGE_DNS,
 	[SYS_ftruncate] = PLEDGE_STDIO,
 	[SYS_futex] = PLEDGE_STDIO,
 	[SYS_lseek] = PLEDGE_STDIO,
-	[SYS_sendto] = PLEDGE_STDIO,
-	[SYS_sendmsg] = PLEDGE_STDIO,
+	[SYS_sendto] = PLEDGE_STDIO | PLEDGE_DNS,
+	[SYS_sendmsg] = PLEDGE_STDIO | PLEDGE_SENDFD,
 	[SYS_nanosleep] = PLEDGE_STDIO,
 	[SYS_sigaltstack] = PLEDGE_STDIO,
 	[SYS_rt_sigprocmask] = PLEDGE_STDIO,
@@ -127,7 +128,7 @@ const uint64_t pledge_syscalls[] = {
 	[SYS_wait4] = PLEDGE_STDIO,
 	[SYS_kill] = PLEDGE_STDIO,
 	[SYS_ioctl] = PLEDGE_STDIO,
-	[SYS_open] = PLEDGE_STDIO,
+	[SYS_open] = PLEDGE_STDIO | PLEDGE_DNS,
 	[SYS_stat] = PLEDGE_STDIO,
 #if defined(SYS_stat64) && SYS_stat64 != SYS_stat
 	[SYS_stat64] = PLEDGE_STDIO,
@@ -252,8 +253,8 @@ const uint64_t pledge_syscalls[] = {
 	[SYS_execve] = PLEDGE_EXEC,
 	[SYS_execveat] = PLEDGE_EXEC,
 
-	[SYS_socket] = PLEDGE_INET | PLEDGE_UNIX,
-	[SYS_connect] = PLEDGE_INET | PLEDGE_UNIX,
+	[SYS_socket] = PLEDGE_INET | PLEDGE_UNIX | PLEDGE_DNS,
+	[SYS_connect] = PLEDGE_INET | PLEDGE_UNIX | PLEDGE_DNS,
 	[SYS_bind] = PLEDGE_INET | PLEDGE_UNIX,
 	[SYS_getsockname] = PLEDGE_INET | PLEDGE_UNIX,
 
