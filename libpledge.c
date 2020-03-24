@@ -236,6 +236,7 @@ pledge_filter(uint64_t flags, uint64_t oldflags)
 	/* space for 3 different return statements (KILL,ALLOW,EPERM) */
 	len += 4;
 
+	/*
 	printf("allowsocket %d unix=%d inet=%d\n", allow_socket,
 	    ((flags&PLEDGE_UNIX) == PLEDGE_UNIX),
 	    ((flags&PLEDGE_INET) == PLEDGE_INET));
@@ -246,6 +247,7 @@ pledge_filter(uint64_t flags, uint64_t oldflags)
 	printf("allow ioctl always %d\n", allow_ioctl_always);
 	printf("allow ioctl ioctl %d\n", allow_ioctl_ioctl);
 	printf("filter open %d\n", filter_open);
+	*/
 
 	if (!(fprog = calloc(1, sizeof(struct sock_fprog))))
 		return 0;
