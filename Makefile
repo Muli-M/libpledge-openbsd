@@ -57,24 +57,27 @@ install: all
 	install -m0755 pledge $(DESTDIR)$(BINDIR)
 	install -m0644 man/pledge.1 $(DESTDIR)$(MANDIR)/man1
 
-debian: Makefile control_tmpl
-	rm -rf debian
-	mkdir -p debian/DEBIAN
-	mkdir -p debian/usr/local/include
-	mkdir -p debian/usr/local/lib
-	mkdir -p debian/usr/local/share/man/man1
-	DESTDIR=$(shell pwd)/debian fakeroot make -f Makefile install
+debian: Makefile debian/control
+	rm -rf debian/tmp
+	mkdir -p debian/tmp/DEBIAN
+	mkdir -p debian/tmp/usr/local/include
+	mkdir -p debian/tmp/usr/local/lib
+	mkdir -p debian/tmp/usr/local/share/man/man1
+	DESTDIR=$(shell pwd)/debian/tmp fakeroot make -f Makefile install
 
+	# generate changelog from git log
+	gbp dch
+	sed -i "/UNRELEASED;/s/unknown/${MULI_TAG}/" debian/changelog
+	# generate dependencies
+	dpkg-shlibdeps -l/usr/local/lib debian/tmp/usr/local/lib/libpledge-openbsd.so
+	# generate symbols file
+	dpkg-gensymbols
+	# generate md5sums file
+	find debian/tmp/ -type f -exec md5sum '{}' + | grep -v DEBIAN | sed s#debian/tmp/## > debian/tmp/DEBIAN/md5sums
 	# control
-	echo "Version: ${MULI_TAG}" > debian/DEBIAN/control
-	echo "Architecture: ${ARCH}" >> debian/DEBIAN/control
-	cat control_tmpl >> debian/DEBIAN/control
-
-	# debian scripts
-#	install -D preinst debian/DEBIAN
-#	install -D postinst debian/DEBIAN
+	dpkg-gencontrol -v${MULI_TAG}
 
 
-	fakeroot dpkg-deb --build debian .
+	fakeroot dpkg-deb --build debian/tmp .
 
 .PHONY: all options tests clean install debian

@@ -1,7 +1,9 @@
 *.[ao]
-*.so
-/pledge
-*~
 *.bak
-debian/
 *.deb
+*.so
+*~
+/pledge
+debian/files
+debian/substvars
+debian/tmp/

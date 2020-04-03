@@ -1,0 +1,14 @@
+Source: libpledge-openbsd
+Section: libs
+Priority: optional
+Maintainer: Maxim Zakharov <zakhma@muli.com.au>
+Build-Depends: make, dpkg-dev, git-buildpackage, fakeroot
+Standards-Version: 4.1.4
+
+Package: libpledge-openbsd
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Library to self-restrict system operations.
+
+
+

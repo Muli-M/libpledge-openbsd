@@ -1,9 +1,0 @@
-Origin: Muli
-Package: libpledge-openbsd
-Section: libs
-Priority: optional
-Maintainer: Maxim Zakharov <zakhma@muli.com.au>
-Description: Library to self-restrict system operations.
-
-
-

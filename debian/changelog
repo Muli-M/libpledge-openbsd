@@ -1,0 +1,44 @@
+libpledge-openbsd (1.4) UNRELEASED; urgency=medium
+
+  [ Maxim Zakharov ]
+  * 
+
+  [ Duncaen ]
+  * initial commit
+  * libpledge: make the core functions that are used by pledge accessible
+  * Makefile: comment out newns stuff
+  * libpledge: move long comment about pledge(2) to README
+  * libpledge: fix PLEDGE_* flags
+  * libpledge: add verbose and debug promises
+  * pledge: add debug and verbose flags
+  * libpledge: fix compiler warnings and minor cleanups
+  * libpledge: add a more syscalls and promises
+  * README: fix typo
+  * libplede: style and structure changes
+  * libpledge: fix pledge_filter
+  * libpledge/pledge: fix more warnings
+  * libpledge: move filter conditions into pledge.h
+  * move headers and man pages into separate directories
+  * Makefile: move variables to config.mk
+  * libpledge: add first tests
+  * libpledge: make filter conditions more clear
+  * libpledge: improve filters
+  * libpledge: move SYS_set_tid_address to the stdio promise
+  * libpledge: fix ioctl filters, second argument is a long
+  * libpledge, add SYS_gttid and SYS_tgkill to the stdio promise
+  * libpledge: cleanup and move seccomp bpf macros into their own header file
+  * libpledge: add SYS_getrandom to the stdio promise
+  * libpledge: more filters (SYS_open flags) and some fixes
+
+  [ Duncan Overbruck ]
+  * add LICENSE
+
+  [ Maxim Zakharov ]
+  * add debian packaging; remove redundant
+  * correct library name
+  * add missed includes
+  * correct build dependencies
+  * add pledge of dns, sendfd, recvfd
+  * disable debugging output
+
+ -- Maxim Zakharov <maxime@maxim-MUX>  Fri, 03 Apr 2020 14:33:52 +1100
