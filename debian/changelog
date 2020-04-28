@@ -41,4 +41,10 @@ libpledge-openbsd (1.4) UNRELEASED; urgency=medium
   * add pledge of dns, sendfd, recvfd
   * disable debugging output
 
- -- Maxim Zakharov <maxime@maxim-MUX>  Fri, 03 Apr 2020 14:33:52 +1100
+  [ Duncan Overbruck ]
+  * add LICENSE
+
+  [ Maxim Zakharov ]
+  * add README.md file
+
+ -- Maxim Zakharov <5158255+Maxime2@users.noreply.github.com>  Tue, 28 Apr 2020 10:34:02 +1000
