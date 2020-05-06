@@ -46,7 +46,7 @@ tests:
 clean:
 	-rm -f $(ALL) *.o
 	rm -f *~ *.deb
-	rm -rf debian
+	rm -rf debian/tmp
 
 install: all
 	mkdir -p $(DESTDIR)$(BINDIR) \
