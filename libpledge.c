@@ -376,7 +376,7 @@ pledge_filter(uint64_t flags, uint64_t oldflags)
 	_RET(SECCOMP_RET_KILL);
 #endif
 
-	printf("length=%ld expected=%ld\n", (fp-fprog->filter), len);
+	/* printf("length=%ld expected=%ld\n", (fp-fprog->filter), len); */
 
 	return fprog;
 }
