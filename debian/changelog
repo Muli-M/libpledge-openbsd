@@ -46,5 +46,7 @@ libpledge-openbsd (1.4) UNRELEASED; urgency=medium
 
   [ Maxim Zakharov ]
   * add README.md file
+  * disable debug output
+  * correct clean target
 
- -- Maxim Zakharov <5158255+Maxime2@users.noreply.github.com>  Tue, 28 Apr 2020 10:34:02 +1000
+ -- Maxim Zakharov <5158255+Maxime2@users.noreply.github.com>  Wed, 06 May 2020 14:54:16 +1000
