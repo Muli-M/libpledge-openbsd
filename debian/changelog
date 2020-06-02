@@ -48,5 +48,6 @@ libpledge-openbsd (1.4) UNRELEASED; urgency=medium
   * add README.md file
   * disable debug output
   * correct clean target
+  * add sname, API version and debian/triggers
 
- -- Maxim Zakharov <5158255+Maxime2@users.noreply.github.com>  Wed, 06 May 2020 14:54:16 +1000
+ -- Maxim Zakharov <5158255+Maxime2@users.noreply.github.com>  Tue, 02 Jun 2020 13:09:22 +1000
