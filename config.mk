@@ -9,3 +9,4 @@ CFLAGS+=-Wall -Wextra -Wwrite-strings -Wno-switch -Wno-extended-offsetof -pedant
 CPPFLAGS+=-D_DEFAULT_SOURCE -D_GNU_SOURCE -D_FORTIFY_SOURCE=2
 
 CC=cc
+LN=ln

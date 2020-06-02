@@ -2,6 +2,7 @@
 *.bak
 *.deb
 *.so
+*.so.[0-9]*
 *~
 /pledge
 debian/files

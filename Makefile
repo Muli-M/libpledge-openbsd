@@ -6,6 +6,7 @@ ARCH=`dpkg --print-architecture`
 
 include config.mk
 
+API_VERSION=0
 LIBPLEDGE=libpledge-openbsd
 PROGS = pledge
 LIBS = $(LIBPLEDGE)
@@ -32,7 +33,8 @@ pledge:
 	ar rc $@ $^
 
 %.so:
-	$(CC) -shared $^ -o $@ $(LDFLAGS)
+	$(CC) -shared $^ -Wl,-soname,$@.$(API_VERSION) -o $@.$(API_VERSION) $(LDFLAGS)
+	$(LN) -s $@.$(API_VERSION) $@
 
 options:
 	@echo "CFLAGS  = ${CFLAGS}"
@@ -44,7 +46,7 @@ tests:
 	make -C tests/pledge
 
 clean:
-	-rm -f $(ALL) *.o
+	-rm -f $(ALL) *.o *.so.$(API_VERSION)
 	rm -f *~ *.deb
 	rm -rf debian/tmp
 
@@ -52,7 +54,8 @@ install: all
 	mkdir -p $(DESTDIR)$(BINDIR) \
 		$(DESTDIR)$(LIBDIR) \
 		$(DESTDIR)$(INCDIR)
-	install -m0644 $(LIBPLEDGE).a $(LIBPLEDGE).so $(DESTDIR)$(LIBDIR)
+	install -m0644 $(LIBPLEDGE).a $(LIBPLEDGE).so.$(API_VERSION) $(DESTDIR)$(LIBDIR)
+	cp -d $(LIBPLEDGE).so $(DESTDIR)$(LIBDIR)
 	install -m0644 include/pledge.h $(DESTDIR)$(INCDIR)
 	install -m0755 pledge $(DESTDIR)$(BINDIR)
 	install -m0644 man/pledge.1 $(DESTDIR)$(MANDIR)/man1
@@ -69,9 +72,11 @@ debian: Makefile debian/control
 	gbp dch --ignore-branch --git-author
 	sed -i "/UNRELEASED;/s/unknown/${MULI_TAG}/" debian/changelog
 	# generate dependencies
-	dpkg-shlibdeps -l/usr/local/lib debian/tmp/usr/local/lib/libpledge-openbsd.so
+	dpkg-shlibdeps debian/tmp/usr/local/lib/libpledge-openbsd.so debian/tmp/usr/local/bin/pledge
 	# generate symbols file
 	dpkg-gensymbols
+	# generate triggers file
+	echo "activate-noawait ldconfig" > debian/tmp/DEBIAN/triggers
 	# generate md5sums file
 	find debian/tmp/ -type f -exec md5sum '{}' + | grep -v DEBIAN | sed s#debian/tmp/## > debian/tmp/DEBIAN/md5sums
 	# control
