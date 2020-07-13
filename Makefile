@@ -34,7 +34,7 @@ pledge:
 
 %.so:
 	$(CC) -shared $^ -Wl,-soname,$@.$(API_VERSION) -o $@.$(API_VERSION) $(LDFLAGS)
-	$(LN) -s $@.$(API_VERSION) $@
+	$(LN) -f -s $@.$(API_VERSION) $@
 
 options:
 	@echo "CFLAGS  = ${CFLAGS}"

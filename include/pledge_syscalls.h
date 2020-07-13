@@ -44,6 +44,9 @@ const uint64_t pledge_syscalls[] = {
 #endif
 	[SYS_mprotect] = PLEDGE_STDIO,
 	[SYS_munmap] = PLEDGE_STDIO,
+#if defined(SYS_mremap)
+	[SYS_mremap] = PLEDGE_STDIO,
+#endif
 	[SYS_msync] = PLEDGE_STDIO,
 	[SYS_brk] = PLEDGE_STDIO,
 	[SYS_umask] = PLEDGE_STDIO,
